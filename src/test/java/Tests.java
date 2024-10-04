@@ -43,6 +43,18 @@ public class Tests {
         signInPage.logIn(frameworkProperties.getProperty(Constants.EMAIL), frameworkProperties.getProperty(Constants.PASSWORD));
         assertEquals(frameworkProperties.getProperty(Constants.USERNAME), homePage.getUsername());
     }
+    // parameterized test allows us to run the same test multiple times with different params(like a loop that iterates over a collection of params and feed the test method)
+    @ParameterizedTest
+    @CsvSource({
+            "samaneh@gmail.com, MTIzNDU2",
+            "rey@gmail.com, MTIzNDU2"
+    })
+    public void testingParameterizedScenario(String username, String password){
+        driver.get(Constants.URL);
+        homePage.clickSignIn();
+        signInPage.logIn(username, password);
+        assertEquals("Hello " + username, homePage.getUsername());
+    }
     @Test
     public void testingAddingThingsToCart(){
         driver.get(Constants.URL);
