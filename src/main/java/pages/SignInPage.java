@@ -26,7 +26,7 @@ public class SignInPage {
 
     public void logIn(String email, String password){
         signInEmail.sendKeys(email);
-        this.password.sendKeys(Utils.decode64(password));
+        this.password.sendKeys(Utils.decode64(password)); // using encoded password so it should be decoded
         signInButton.click();
     }
 }

@@ -1,8 +1,10 @@
 import drivers.DriverSingleton;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.FixMethodOrder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.WebDriver;
 import pages.*;
@@ -22,7 +24,7 @@ public class Tests {
     static ShopPage shopPage;
     static CartPage cartPage;
 
-    @BeforeClass
+    @BeforeAll
     public static void initializeObjects(){
         frameworkProperties = new FrameworkProperties();
         DriverSingleton.getInstance(frameworkProperties.getProperty(Constants.BROWSER));
@@ -40,6 +42,18 @@ public class Tests {
         homePage.clickSignIn();
         signInPage.logIn(frameworkProperties.getProperty(Constants.EMAIL), frameworkProperties.getProperty(Constants.PASSWORD));
         assertEquals(frameworkProperties.getProperty(Constants.USERNAME), homePage.getUsername());
+    }
+    // parameterized test allows us to run the same test multiple times with different params(like a loop that iterates over a collection of params and feed the test method)
+    @ParameterizedTest
+    @CsvSource({
+            "samaneh@gmail.com, MTIzNDU2",
+            "rey@gmail.com, MTIzNDU2"
+    })
+    public void testingParameterizedScenario(String username, String password){
+        driver.get(Constants.URL);
+        homePage.clickSignIn();
+        signInPage.logIn(username, password);
+        assertEquals("Hello " + username, homePage.getUsername());
     }
     @Test
     public void testingAddingThingsToCart(){
@@ -64,7 +78,7 @@ public class Tests {
         assertEquals("Order received", checkoutPage.getOrderStatus());
     }
 
-    @AfterClass
+    @AfterAll
     public static void closeObjects(){
         driver.close();
     }
