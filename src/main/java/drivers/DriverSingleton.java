@@ -22,6 +22,7 @@ public class DriverSingleton {
         return driver;
     }
 
+    // getInstance() ensures that only one instance of DriverSingleton is created
     public static DriverSingleton getInstance(String driver){
         if(instance == null){
             instance = new DriverSingleton(driver);

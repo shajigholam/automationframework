@@ -20,7 +20,7 @@ public class Main {
         homePage.clickSignIn();
         signInPage.logIn(frameworkProperties.getProperty(Constants.EMAIL), frameworkProperties.getProperty(Constants.PASSWORD));
 
-        if(homePage.getUsername().equals("Hello, Laurentiu"))
+        if(homePage.getUsername().equals("Hello, Samaneh"))
             System.out.println("Test Passed");
         else
             System.out.println("Test Failed");
