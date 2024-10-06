@@ -18,13 +18,13 @@ public class HomePage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(id = "menu-item-1311")
+    @FindBy(css = "#menu-item-2330 > a")
     private WebElement signInButton;
 
     @FindBy(id = "menu-item-1310")
     private WebElement shopButton;
 
-    @FindBy(css = "#menu-item-1314 > a")
+    @FindBy(css = "#menu-item-2333 > a")
     private WebElement username;
 
     public void clickSignIn() {

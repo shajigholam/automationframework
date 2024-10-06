@@ -17,7 +17,7 @@ public class ConfigurationProperties {
     @Value("${password}")
     private String password;
 
-    @Value("${user}")
+    @Value("${username}")
     private String userName;
 
     public String getBrowser() {
