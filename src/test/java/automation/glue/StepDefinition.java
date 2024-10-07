@@ -46,16 +46,16 @@ public class StepDefinition {
         cartPage = new CartPage();
         TestCases[] tests = TestCases.values();
         test = report.startTest(tests[Utils.testCount].getTestName());
-//        Log.getLogData(Log.class.getName());
-//        Log.startTest(tests[Utils.testCount].getTestName());
+        Log.getLogData(Log.class.getName());
+        Log.startTest(tests[Utils.testCount].getTestName());
         Utils.testCount++;
     }
 
     @Given("^I go to the Website")
-    public void i_go_to_the_Website(){
+    public void i_go_to_the_website(){
         driver = DriverSingleton.getDriver();
         driver.get(Constants.URL);
-//        Log.info("INFO: Navigating to " + Constants.URL);
+        Log.info("INFO: Navigating to " + Constants.URL);
         test.log(LogStatus.PASS, "Navigating to " + Constants.URL);
     }
 
@@ -96,7 +96,7 @@ public class StepDefinition {
 
     @Then("^I can log into the website")
     public void i_can_log_into_the_website(){
-        if("Hello, " + configurationProperties.getUsername() != homePage.getUsername())
+        if(!("Hello, " + configurationProperties.getUsername()).equals(homePage.getUsername()))
             test.log(LogStatus.FAIL, "Authentication failed.");
         assertEquals("Hello, " + configurationProperties.getUsername(), homePage.getUsername());
         test.log(LogStatus.PASS, "Authentication is successful.");
@@ -108,7 +108,7 @@ public class StepDefinition {
         test.log(LogStatus.PASS, "The item was bought.");
     }
 
-    @io.cucumber.java.After
+    @After
     public void closeDriver(){
         driver.close();
         report.endTest(test);
