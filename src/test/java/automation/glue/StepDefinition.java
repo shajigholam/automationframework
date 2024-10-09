@@ -110,7 +110,7 @@ public class StepDefinition {
 
     @After
     public void closeDriver(){
-        driver.close();
+//        driver.close();
         report.endTest(test);
         report.flush();
     }
